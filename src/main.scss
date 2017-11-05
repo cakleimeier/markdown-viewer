@@ -1,8 +1,119 @@
 @import "./App.css";
 @import "./index.css";
 
-section {
-	display: inline-block;
-	width: 40%;
-	margin: 0;
+$white: #fff;
+$black: #000;
+$darkgrey: #2E3138;
+$light-grey: #6C6F7D;
+$accent: #CCC9E7;
+
+#app {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: stretch;
+	align-content: stretch;
+
+	font-family: Ubuntu, sans serif;
+
+	nav {
+		flex: none;
+		width: 100%;
+		clear: both;
+		padding: 15px 0;
+
+		h1 {
+			font-size: 28px;
+			font-weight: 700;
+			text-transform: uppercase;
+			text-align: center;
+			line-height: 100px;
+		}
+	}
+
+	section {
+		// Page section styles
+		flex: 1 1 49%;
+		font-size: 20px;
+		border: 1px solid $light-grey;
+
+		&:first-of-type {
+			border-right: 0;
+		}
+
+		header {
+			// Page Header styles
+			background-color: $accent;
+			margin: 0;
+			padding: 0;
+			height: 100px;
+
+			h1 {
+				color: $white;
+				text-align: center;
+				margin: 0;
+			}
+		}
+
+		article {
+			// Page subsection styles
+			font-size: 12px;
+
+			h1 {
+				font-size: 18px;
+				color: $black;
+				text-align: center;
+			}
+
+			h2 {
+				font-size: 16px;
+			}
+
+			h3 {
+				font-size: 14px;
+			}
+
+			h5 {
+				font-size: 10px;
+			}
+
+			h6 {
+				font-size: 8px;
+			}
+
+			a {
+				color: #6455E8;
+
+				&:visited {
+					color: #493EA9;
+				}
+			}
+		}
+	}
+
+	textarea {
+		resize: vertical;
+		height: 100%;
+		width: 75%;
+		margin: 5% auto 0 auto;
+		color: $black;
+		font-family: 'Ubuntu Mono', sans serif;
+		font-size: 14px;
+		padding: 5px;
+	}
+}
+
+#input {
+	article {
+		text-align: center;
+	}
+}
+
+#output {
+	color: $darkgrey;
+
+	div {
+		width: 75%;
+		margin: 0 auto;
+	}
 }

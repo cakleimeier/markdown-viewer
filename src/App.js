@@ -2,69 +2,63 @@ import React, { Component } from 'react';
 
 var marked = require('marked');
 
-class App extends React.Component {
+class Output extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state= {
+      input: props.markdown
+    }
+  }
 
+  render () {
+    return (
+      <div dangerouslySetInnerHTML={{__html:marked(this.props.markdown)}}></div>
+    )
+  }
+}
+
+class Input extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      original: '',
-      compiled: ''
+      input: ''
     }
   }
 
   handleChange(event) {
-    this.setState({original: event.target.value});
-
-    this.setState({compiled: marked(this.state.original)});
+    this.setState({input: this.refs.inputArea.value});
   }
 
-  
-  render() {
+  render () {
     return (
       <section id="app">
+        <nav>
+          <h1>Markdown Previewer</h1>
+        </nav>
+
         <section id="input">
-          <textarea ref="inputArea" value={this.state.original? this.state.original : ''} onChange={this.handleChange.bind(this)}/>
+          <header>
+            <h1>Input</h1>
+          </header>
+
+          <article>
+            <textarea placeholder="Input Markdown here to see the result!" rows="25" ref="inputArea" value={this.state.input? this.state.input : ''} onChange={this.handleChange.bind(this)}/>
+          </article>
         </section>
-        <section id="output" dangerouslySetInnerHTML={{__html:this.state.compiled}}></section>
+
+        <section id="output">
+          <header>
+            <h1>Output</h1>
+          </header>
+
+          <article>
+            <Output markdown={this.state.input}/>
+          </article>
+        </section>
       </section>
     )
   }
 }
 
 
-export default App;
-
-/*
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: 'Please write an essay about your favorite DOM element.'
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(event) {
-    this.setState({value: event.target.value});
-  }
-
-  handleSubmit(event) {
-    alert('An essay was submitted: ' + this.state.value);
-    event.preventDefault();
-  }
-
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Name:
-          <textarea value={this.state.value} onChange={this.handleChange} />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
-    );
-  }
-}
-*/
+export default Input;
